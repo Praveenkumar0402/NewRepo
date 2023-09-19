@@ -1,0 +1,111 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row mt-5">
+
+      <div class="col-md-4">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">bar_chart</i>
+            </div>
+            <p class="card-category">Clean Requests</p>
+            <h3 class="card-title">{{complaints.length}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">bubble_chart</i> Updated
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons"><span class="material-icons-outlined">
+                  file_copy
+                </span></i>
+            </div>
+            <p class="card-category">Suggestions</p>
+            <h3 class="card-title">3</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">bubble_chart</i> Updated
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons"> pie_chart</i>
+            </div>
+            <p class="card-category">Complaints</p>
+            <h3 class="card-title">4</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">bubble_chart</i> Updated
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="card card-stats">
+          <div class="card-header card-header-warning card-header-icon mt-3">
+            <!-- <div class="card-icon">
+                <i class="material-icons">book</i>
+              </div> -->
+            <h2 class="card-title text-left">Suggestion Record</h2>
+          </div>
+          <div class="card-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr class="text-left">
+                          <th>Housekeeper</th>
+                          <th>Room </th>
+                          <th>Date</th>
+                          <th>suggestions</th>
+
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let row of hdata; let i = index" class="text-left">
+                          <td>&nbsp;&nbsp;{{row.hname}}</td>
+                          <td>&nbsp;{{row.room }}</td>
+                          <td>{{row.date}}</td>
+                          <td>Test</td>
+                         
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">bubble_chart</i> Updated
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

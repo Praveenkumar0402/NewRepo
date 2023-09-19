@@ -1,0 +1,480 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row usermasterview" *ngIf="!isshown">
+            <div class="col-md-12">
+                <div class="card w-100">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">perm_identity</i>
+                        </div>
+                        <h4 class="card-title text-muted">{{iseditflag? "Update Client":
+                            "Create Client"}}
+                        </h4>
+                        <button mat-raised-button type="button" class="btn btn-primary float-right btn-link"
+                            (click)="toggleshow()">Back</button>
+                    </div>
+                    <div class="card-body">
+
+                        <form [formGroup]="userForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <input type="text" class="form-control" placeholder="First Name(e.g John)"
+                                            formControlName="firstname">
+                                        <span *ngIf="userForm.controls['firstname'].touched &&
+                                        userForm.controls['firstname'].invalid" class="error">Enter Valid
+                                            First Name.</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <input type="text" class="form-control" placeholder="Last Name(e.g Rake)"
+                                            formControlName="lastname">
+                                        <span *ngIf="userForm.controls['lastname'].touched &&
+                                        userForm.controls['lastname'].invalid" class="error">Enter Valid
+                                            Last Name.</span>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <input type="email" placeholder="Email id" class="form-control"
+                                            formControlName="useremail">
+                                        <span *ngIf="userForm.controls['useremail'].touched &&
+                                        userForm.controls['useremail'].invalid" class="error">Enter Valid
+                                            Email .</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <input type="text" placeholder="Mobile No" class="form-control"
+                                            formControlName="usercontactno">
+                                        <span *ngIf="userForm.controls['usercontactno'].touched &&
+                                        userForm.controls['usercontactno'].invalid" class="error">Enter Valid
+                                            Mobile No.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" *ngIf="!iseditflag">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <input type="text" placeholder="Username" class="form-control"
+                                            formControlName="username">
+                                        <span *ngIf="userForm.controls['username'].touched &&
+                                        userForm.controls['username'].invalid" class="error">Enter Valid
+                                            username .</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <input type="password" placeholder="Password" class="form-control"
+                                            formControlName="userpassword">
+                                        <span *ngIf="userForm.controls['userpassword'].touched &&
+                                        userForm.controls['userpassword'].invalid" class="error">Enter Valid
+                                            Password.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="pull-right">
+                                <button mat-raised-button type="reset" class="btn btn-danger"
+                                    [disabled]="iseditflag">Reset</button>
+                                <button mat-raised-button type="submit" class="btn btn-success"
+                                    (click)="iseditflag?editusermaster():addusermaster()">{{iseditflag? "Update Client":
+                                    "Create Client"}}</button>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="isshown">
+            <div class="col-md-12">
+                <!-- <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">perm_identity</i>
+                        </div>
+                        <h2 class="card-title text-left text-muted">Client Details</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr class="text-left">
+                                        <th class="font-weight-bold text-capitalize">Client Id</th>
+                                        <th class="font-weight-bold text-capitalize">Client Name</th>
+                                        <th class="font-weight-bold text-capitalize">Role</th>
+                                        <th class="font-weight-bold text-capitalize">Email</th>
+                                        <th class="font-weight-bold text-capitalize">Contact No </th>
+                                        <th class="font-weight-bold text-capitalize">
+                                            Edit
+                                        </th>
+                                        <th class="font-weight-bold text-capitalize">
+                                            Delete
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of dataSource; let i = index" class="text-left">
+                                        <td class="text-muted">&nbsp;&nbsp;{{row.usermasterid}}</td>
+                                        <td class="text-capitalize text-muted">&nbsp;{{row.usermastername }}</td>
+                                        <td class="text-capitalize text-muted">User</td>
+                                        <td class="text-capitalize text-muted">{{row.emailid}}</td>
+                                        <td class="text-muted">&nbsp;&nbsp;{{row.mobilenumber}}</td>
+
+
+                                        <td class="td-actions">
+
+                                            <button mat-raised-button type="button" class="btn btn-success" (click) = "editusermasterform(row)" disabled>
+                                                <i class="material-icons">edit</i>
+                                            </button>
+
+                                        </td>
+
+                                        <td class="td-actions">
+                                            <button mat-raised-button type="button" class="btn btn-danger" (click) = "deleteusermaster(row.usermasterid)">
+                                                <i class="material-icons">delete</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                        *ngFor="let row of dataSource;">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="text-capitalize text-muted">
+                                <i class="material-icons mr-2 text-success">account_circle</i>   {{row.usermastername }}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                  
+                             
+                            </mat-panel-description>
+                           
+                        </mat-expansion-panel-header>
+
+                        <!--info add here-->
+
+
+                        <mat-tab-group>
+                            <mat-tab label="Profile"> 
+                                <div class="container-fluid">
+                                    <!-- <div class="row">
+                                        <div class="col-sm-12">
+                                           
+                                            <button mat-raised-button type="button" class="btn btn-danger pull-right" (click) = "deleteusermaster(row.usermasterid)">
+                                                <i class="material-icons">delete</i>
+                                            </button>
+                                            <button mat-raised-button type="button" class="btn btn-success pull-right" disabled>
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button mat-raised-button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal"
+                                            (click)="createGetwayForm()">
+                                                <i class="material-icons" >dns</i>
+                                            </button>
+
+                                            <button mat-raised-button type="button" class="btn btn-info pull-right">
+                                                <i class='fas fa-robot' style="font-size: 15px;"></i>
+                                            </button>
+                                        </div>
+                                    </div> -->
+                                    <table class="table mt-2">
+                                        <thead>
+                                            <tr class="text-left">
+                                                <th class="font-weight-bold text-capitalize">Client Id</th>
+                                                <!-- <th class="font-weight-bold text-capitalize">Client Name</th> -->
+                                                <th class="font-weight-bold text-capitalize">Role</th>
+                                                <th class="font-weight-bold text-capitalize">Email</th>
+                                                <th class="font-weight-bold text-capitalize">Contact No </th>
+                                                <th class="font-weight-bold text-capitalize">Gateway</th>
+                                                <th class="font-weight-bold text-capitalize">Robot</th>
+                                                <th class="font-weight-bold text-capitalize">Edit</th>
+                                                <th class="font-weight-bold text-capitalize">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr  class="text-left">
+                                                <td class="text-muted">&nbsp;&nbsp;{{row.usermasterid}}</td>
+                                                <!-- <td class="text-capitalize text-muted">&nbsp;{{row.usermastername }}</td> -->
+                                                <td class="text-capitalize text-muted">User</td>
+                                                <td class="text-capitalize text-muted">{{row.emailid}}</td>
+                                                <td class="text-muted">&nbsp;&nbsp;{{row.mobilenumber}}</td>
+
+                                                <td>
+                                                    <button mat-raised-button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"
+                                                    (click)="createGetwayForm()">
+                                                        <i class="material-icons" >dns</i>&nbsp;
+                                                        Add Gateway
+                                                    </button>
+                                                   
+                                                </td>
+
+
+
+                                                <td class="text-capitalize text-muted text-left">
+                                                    <button mat-raised-button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal1" (click)="updateRobotForm(row.usermasterid,row.usermastername)">
+    
+                                                        <i class='fas fa-robot' style="font-size: 15px;"></i>&nbsp;
+                                                        Add Robot
+                                                    </button>        
+                                                    
+                                                </td>
+
+                                              
+                                                <td>
+                                                    <button mat-raised-button type="button" class="btn btn-success" disabled>
+                                                        <i class="material-icons">edit</i>&nbsp;
+                                                        Edit 
+                                                    </button>
+                                                   
+                                                </td>
+
+                                                <td>
+                                                
+                                                    <button mat-raised-button type="button" class="btn btn-danger" (click) = "deleteusermaster(row.usermasterid)">
+                                                        <i class="material-icons">delete</i>&nbsp;
+                                                        Delete
+                                                    </button>
+                                                </td>
+                                                
+    
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Gateways"> 
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr class="text-left">
+                                                            <th class="font-weight-bold text-capitalize">Gateway Id</th>
+                                                            <th class="font-weight-bold text-capitalize">Gateway Name</th>
+                                                            <th class="font-weight-bold text-capitalize">Passcode</th>
+                                                            <th class="font-weight-bold text-capitalize">status</th>
+                                                        
+                                                            <th class="font-weight-bold text-capitalize">
+                                                                Delete
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let row1 of dataSource1; let i = index" class="text-left">
+                                                            <td class="text-muted">&nbsp;&nbsp;{{row1.getwaymasterid}}</td>
+                                                            <td class="text-capitalize text-muted">&nbsp;{{row1.getwayname }}</td>
+                                 
+                                                            <td class="text-capitalize text-muted">{{row1.passcode}}</td>
+                                                            <td class="text-muted  text-capitalize text-danger">&nbsp;&nbsp;{{row1.getwaystatus}}</td>
+                    
+                    
+                    
+                                                            <td class="td-actions">
+                                                                <button mat-raised-button type="button" class="btn btn-danger" disabled>
+                                                                    <i class="material-icons">delete</i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Robots">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr class="text-left">
+                                                            <th class="font-weight-bold text-capitalize">Robot Id</th>
+                                                            <th class="font-weight-bold text-capitalize">Robot Name</th>
+                                                            <th class="font-weight-bold text-capitalize">Gateway</th>
+                                                            <th class="font-weight-bold text-capitalize">Client Name</th>
+                                                          
+
+                                                            <th class="font-weight-bold text-capitalize">Create Date</th>
+                                                            <th class="font-weight-bold text-capitalize">status</th>
+                                                        
+                                                            <th class="font-weight-bold text-capitalize">
+                                                                Delete
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody >
+                                                        <tr *ngFor="let row1 of dataSource2; let i = index" class="text-left">
+                                                            <td class="text-muted">&nbsp;&nbsp;{{row1.robotid}}</td>
+                                                            <td class="text-capitalize text-muted">&nbsp;{{row1.robotname }}</td>
+                                                            <td class="text-muted  text-capitalize">&nbsp;&nbsp;{{row1.gatewayid}}</td>
+                                                            <td class="text-capitalize text-muted">{{row1.clientname}}</td>
+                                                           
+                                                            <td class="text-capitalize text-muted">{{row1.createddate}}</td>
+                                                            <td class="text-capitalize text-muted text-danger">{{row1.robotstatus}}</td>
+                    
+                    
+                                                            <td class="td-actions">
+                                                                <button mat-raised-button type="button" class="btn btn-danger" disabled>
+                                                                    <i class="material-icons">delete</i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+
+            </div>
+        </div>
+        <div class="card-icon col-md-3 ml-auto" *ngIf="isshown">
+            <i class="material-icons icon " (click)="toggleshow();createuserform()">add_circle</i>
+
+        </div>
+    </div>
+</div>
+
+
+<!--add gateway box-->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Gateway</h4>
+                <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="getwaymasterform">
+
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Gateway ID</mat-label>
+                                <input matInput formControlName="getwaymasterid" value="{{id}}"  class = "form-control" readonly>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Gateway Name</mat-label>
+                                <input matInput formControlName="getwayname"  class = "form-control">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Passcode</mat-label>
+                                <input matInput formControlName="passcode"  class = "form-control">
+                            </mat-form-field>
+                        </div>
+
+
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button mat-raised-button type="button" class="btn btn-link btn-danger">Reset</button>
+                <button mat-raised-button type="button" class="btn btn-success btn-link" (click)="addGetwayMaster()"
+                    data-dismiss="modal" aria-hidden="true">Add
+                    Gateway</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- add robot box-->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Robot</h4>
+                <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">clear</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="robotform">
+
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                           <label>Select Gateway</label>
+                           <select class="form-control" formControlName="gatewayid">
+                               <option *ngFor="let row of dataSource1" value="{{row.getwaymasterid}}">{{row.getwaymasterid}}</option>
+                           </select>
+                
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                           <label>Assign to</label>
+                           <input  value="{{clientnamedisplay}}" class = "form-control" disabled>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-sm-12">
+                            <label>Robot Name</label>
+                            <input  formControlName="robotname"  class = "form-control">
+                        </div>
+                    </div>
+
+                    
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button mat-raised-button type="button" class="btn btn-link btn-danger">Reset</button>
+                <button mat-raised-button type="button" class="btn btn-success btn-link" (click)="addroboMaster()"
+                    data-dismiss="modal" aria-hidden="true">Add
+                    Robot</button>
+            </div>
+        </div>
+    </div>
+</div>

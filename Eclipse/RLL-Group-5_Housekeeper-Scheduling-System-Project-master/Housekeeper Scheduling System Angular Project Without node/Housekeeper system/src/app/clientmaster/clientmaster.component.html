@@ -1,0 +1,196 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <mat-tab-group>
+            <mat-tab label="Clients">
+                <br>
+                <div class="container-fluid">
+                    <div class="row usermasterview" *ngIf="!isshown">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-icon card-header-danger">
+                                    <div class="card-icon">
+                                        <i class="material-icons">perm_identity</i>
+                                    </div>
+                                    <h4 class="card-title">Create Client
+                                    </h4>
+                                    <button mat-raised-button type="button" class="btn btn-danger float-right btn-link"
+                                        (click)="toggleshow()">Back</button>
+                                </div>
+                                <div class="card-body">
+
+                                    <form [formGroup]="userForm">
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-4 col-lg-4">
+                                                <mat-form-field appearance="outline">
+                                                    <mat-label>Client Category</mat-label>
+                                                    <mat-select formControlName="usercategoryid">
+                                                        <mat-option [value]="cat.key"
+                                                            *ngFor="let cat of clientcategorys |  keyvalue">
+                                                            {{cat.value}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-sm-4 col-md-4 col-md-4">
+                                                <mat-form-field appearance="outline">
+                                                    <mat-label>Company Name</mat-label>
+                                                    <input matInput formControlName="companyname">
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-sm-4 col-md-4 col-md-4">
+                                                <mat-form-field appearance="outline">
+                                                    <mat-label>Country</mat-label>
+                                                    <mat-select formControlName="countryid">
+                                                        <mat-option value="1">India</mat-option>
+
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                <mat-form-field appearance="outline">
+                                                    <mat-label>State</mat-label>
+                                                    <mat-select formControlName="stateid">
+                                                        <mat-option value="1">Maharastra</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                <mat-form-field appearance="outline">
+                                                    <mat-label>City</mat-label>
+                                                    <mat-select formControlName="cityid">
+                                                        <mat-option value="1">pune</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                <mat-form-field appearance="outline">
+                                                    <mat-label>Address </mat-label>
+                                                    <input matInput formControlName="cityid">
+                                                </mat-form-field>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                <mat-form-field appearance="outline">
+                                                    <mat-label>Pincode </mat-label>
+                                                    <input matInput formControlName="pincode">
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                <mat-form-field appearance="outline">
+                                                    <mat-label>Installation Date </mat-label>
+                                                    <input matInput type="date" formControlName="dateofactivated">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
+                                        <div align="right">
+                                            <button mat-raised-button type="reset" class="btn btn-danger">Reset</button>
+                                            <button mat-raised-button type="submit" class="btn btn-success"
+                                                (click)="iseditflag?editusermaster():addusermaster()">{{iseditflag?
+                                                "Update
+                                                Client":
+                                                "Create Client"}}</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="isshown">
+                        <div class="col-md-12">
+                            <div class="mat-elevation-z8">
+                                <table mat-table matSort [dataSource]="dataSource" style=" width: 100%;">
+
+                                    <ng-container matColumnDef="position">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sr.No </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="companyname">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Company Name </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.companyname}} </td>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="category">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.category }} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="address">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Address</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.address }} </td>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="installationdate">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Active Date</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.installationdate}} </td>
+                                    </ng-container>
+
+
+
+                                    <ng-container matColumnDef="edit">
+                                        <th mat-header-cell *matHeaderCellDef> Edit </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <button class="border" (click)="editusermasterform(element)">
+                                                <span class="material-icons text-success">
+                                                    create
+                                                </span>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="delete">
+                                        <th mat-header-cell *matHeaderCellDef> Delete </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <button class="border" (click)="deleteusermaster(element)">
+                                                <span class="material-icons text-danger">
+                                                    delete
+                                                </span>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+
+
+
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+
+                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-icon col-md-3 ml-auto" *ngIf="isshown">
+                        <i class="material-icons icon " (click)="toggleshow();createuserform()">add_circle</i>
+
+                    </div>
+                </div>
+                <br>
+                <!-- <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions"
+                    style="width: 100%; height: 400px; display: block;">
+                </highcharts-chart> -->
+            </mat-tab>
+            <mat-tab label="Users">
+
+            </mat-tab>
+        </mat-tab-group>
+
+
+    </div>
+</div>

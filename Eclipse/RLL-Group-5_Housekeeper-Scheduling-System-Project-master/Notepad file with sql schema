@@ -1,0 +1,250 @@
+          Database for housekeeping Scheduler project
+
+	Database creation:
+CREATE SCHEMA `housekeeping_scheduler` ;
+
+	1. Housekeeper student table Creation:
+
+create table students(rollnumber int(12),
+password varchar(40),
+room  varchar(8),
+floor tinyint(4),
+hostel varchar(5));
+ desc students;
+
+
+	2. Housekeeper admin table creation
+
+create table admin(admin_id int(12),
+username varchar(30),
+password varchar(30),
+hostel varchar(5));
+desc admin;
+
+
+
+
+
+
+
+
+	3. Housekeeper table creation:
+
+CREATE TABLE `housekeeping_scheduler`.`housekeeper` (
+  `worker_id` INT(12) NOT NULL,
+  `name` VARCHAR(30) NOT NULL,
+  `hostel` VARCHAR(30) NULL,
+  `floor` TINYINT(4) NULL,
+  `rooms_cleaned` INT(5) NULL,
+  `complaints` TINYINT(4) NULL,
+  PRIMARY KEY (`worker_id`));
+
+mysql> desc housekeeper;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| worker_id     | int         | NO   | PRI | NULL    |       |
+| name          | varchar(30) | NO   |     | NULL    |       |
+| hostel        |   varchar(30) | YES  |     | NULL    |       |
+| floor            | tinyint     | YES  |     | NULL    |       |
+| rooms_cleaned | int         | YES  |     | NULL    |       |
+| complaints    | tinyint     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+
+
+	4. Cleanrequest table creation:
+
+CREATE TABLE `housekeeping_scheduler`.`cleanrequest` (
+  `request_id` INT(12) NOT NULL,
+  `rollnumber` INT(12) NULL,
+  `worker_id` INT(12) NULL,
+  `date` DATE NULL,
+  `cleaningtime` TIME NULL,
+  `req_status` TINYINT NULL,
+  PRIMARY KEY (`request_id`));
+
+mysql> desc cleanrequest;
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| request_id   | int     | NO   | PRI | NULL    |       |
+| rollnumber   | int     | YES  |     | NULL    |       |
+| worker_id    | int     | YES  |     | NULL    |       |
+| date              | date    | YES  |     | NULL    |       |
+| cleaningtime | time    | YES  |     | NULL    |       |
+| req_status   | tinyint | YES  |     | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+
+	5. feedback table creation:
+
+
+mysql> create TABLE Feedback(Request_id varchar(20), Rate_Service varchar(50), TimeIn varchar(20), TimeOut varchar(20),Suggestions varchar(200), Complaints varchar(200));
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> desc Feedback;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| Request_id   | varchar(20)  | YES  |     | NULL    |       |
+| Rate_Service | varchar(50)  | YES  |     | NULL    |       |
+| TimeIn       | varchar(20)  | YES  |     | NULL    |       |
+| TimeOut      | varchar(20)  | YES  |     | NULL    |       |
+| Suggestions  | varchar(200) | YES  |     | NULL    |       |
+| Complaints   | varchar(200) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+6 rows in set (0.03 sec)
+
+
+
+	6. complaints table creation:
+
+mysql> use housekeeping_scheduler;
+Database changed
+mysql> create table Complaints(Complaint_id varchar(20), Feedback_id varchar(20),Rollnumber varchar(20),Complaint varchar(200));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc Complaints;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| Complaint_id | varchar(20)  | YES  |     | NULL    |       |
+| Feedback_id  | varchar(20)  | YES  |     | NULL    |       |
+| Rollnumber   | varchar(20)  | YES  |     | NULL    |       |
+| Complaint    | varchar(200) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
+
+
+	7. Suggestions  table creation:
+
+mysql> create table Suggestions(Suggestion_id varchar(20), Feedback_id varchar(20),Rollnumber varchar(20),Suggestion varchar(200));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc Suggestions;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| Suggestion_id | varchar(20)  | YES  |     | NULL    |       |
+| Feedback_id   | varchar(20)  | YES  |     | NULL    |       |
+| Rollnumber    | varchar(20)  | YES  |     | NULL    |       |
+| Suggestion    | varchar(200) | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+
+
+8.) Update_Profile  table creation:
+mysql>  use housekeeping_scheduler;
+Database changed
+mysql> CREATE TABLE Update_Profile(rollnumber varchar(100),name varchar(100),password varchar(100),floor varchar(20), roomNo varchar(20));
+Query OK, 0 rows affected (0.18 sec)
+
+mysql> desc Update_Profile;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| rollnumber | varchar(100) | YES  |     | NULL    |       |
+| name       | varchar(100) | YES  |     | NULL    |       |
+| password   | varchar(100) | YES  |     | NULL    |       |
+| floor      | varchar(20)  | YES  |     | NULL    |       |
+| roomNo     | varchar(20)  | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.03 sec)
+
+
+
+9.) Authentication table creation:
+
+mysql> use housekeeping_scheduler;
+Database changed
+mysql> CREATE TABLE Authentication(username varchar(100),password varchar(100),role varchar(20), token varchar(20));
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> desc Authentication;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| username | varchar(100) | YES  |     | NULL    |       |
+| password | varchar(100) | YES  |     | NULL    |       |
+| role     | varchar(20)  | YES  |     | NULL    |       |
+| token    | varchar(20)  | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+
+
+10.) Admin Maintenance table creation:
+mysql> use housekeeping_scheduler;
+Database changed
+mysql> CREATE TABLE adminn(id varchar(100),HK_name varchar(100),HK_hostel varchar(100),HK_Floor varchar(20),HK_roomscleaned varchar(20),HK_complaints varchar(200));
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> desc adminn;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| id              | varchar(100) | YES  |     | NULL    |       |
+| HK_name         | varchar(100) | YES  |     | NULL    |       |
+| HK_hostel       | varchar(100) | YES  |     | NULL    |       |
+| HK_Floor        | varchar(20)  | YES  |     | NULL    |       |
+| HK_roomscleaned | varchar(20)  | YES  |     | NULL    |       |
+| HK_complaints   | varchar(200) | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+
+
+
+11.) AdminRegistration table creation:
+mysql> CREATE TABLE AdminAccount(id varchar(100),name varchar(100),password varchar(100),hostel varchar(20));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc AdminAccount;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| id       | varchar(100) | YES  |     | NULL    |       |
+| name     | varchar(100) | YES  |     | NULL    |       |
+| password | varchar(100) | YES  |     | NULL    |       |
+| hostel   | varchar(20)  | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+
+
+12.) AdminRequest table creation:
+mysql>  CREATE TABLE employeeWork_schedule(id int(100),emp_name varchar(100),hostel varchar(100),floor varchar(20),rooms_cleaned int(50),complaints varchar(100));
+Query OK, 0 rows affected, 2 warnings (0.06 sec)
+
+mysql> desc  employeeWork_schedule;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| id            | int          | YES  |     | NULL    |       |
+| emp_name      | varchar(100) | YES  |     | NULL    |       |
+| hostel        | varchar(100) | YES  |     | NULL    |       |
+| floor         | varchar(20)  | YES  |     | NULL    |       |
+| rooms_cleaned | int          | YES  |     | NULL    |       |
+| complaints    | varchar(100) | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+12.) Change password table creation:
+mysql> use housekeeping_scheduler;
+Database changed
+mysql> CREATE TABLE change_password(emp_id varchar(20),old_password varchar(50),new_password varchar(50), confirm_password varchar(20));
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> desc change_password;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| emp_id           | varchar(20) | YES  |     | NULL    |       |
+| old_password     | varchar(50) | YES  |     | NULL    |       |
+| new_password     | varchar(50) | YES  |     | NULL    |       |
+| confirm_password | varchar(20) | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)

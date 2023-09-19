@@ -1,0 +1,56 @@
+<div class="wrapper wrapper-full-page">
+  <!--./assets/img/login.jpg-->
+  <div class="page-header login-page header-filter" filter-color="black"
+    style="background-image: url('./assets/house.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+      <div class="card col-md-4 pb-2 ml-auto mr-auto">
+        <div class="card-header card-header-rose card-header-icon">
+          <div class="card-icon">
+            <i class="material-icons">contacts</i>
+          </div>
+          <h4 class="card-title">Login</h4>
+        </div>
+
+        <form [formGroup]="loginForm">
+          <div class="form-group has-default">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="material-icons">perm_identity</i>
+                </span>
+              </div>
+              <input type="text" formControlName="username" class="form-control" placeholder="Roll Number">
+            </div>
+          </div>
+
+          <div class="form-group has-default">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="material-icons">lock_outline</i>
+                </span>
+              </div>
+              <input type="password" formControlName="password" placeholder="password" class="form-control  ">
+              <!-- <span class="material-icons">
+                visibility_off
+              </span> -->
+
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button type="button" class="btn btn-danger btn-round mt-4" (click)="adminlogin()">Admin Login</button>
+            <button type="submit" class="btn btn-primary btn-round mt-4" (click)="loginUser()"> User Login</button>
+            <!-- <p _ngcontent-c20="" class="btn btn-success btn-lg btn-link py-1 forgot-pass-btn" routerlink="/forgot_pass"
+              tabindex="0">Forgot Password ?</p> -->
+          </div>
+
+          
+
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

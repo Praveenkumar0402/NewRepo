@@ -1,0 +1,28 @@
+.icon{
+    position: fixed!important;
+    right: 5%;
+    bottom: 15%;
+    font-size: 50px;
+    color:#db2316;
+    cursor: pointer;
+}
+.error{
+    color:#bb2124;
+}
+
+.border{
+ border: none;
+ background-color: #ffffff;
+}
+
+h4{
+    display: inline-block;
+}
+button.btn.btn-success.btn-link {
+    margin-top: -22px;
+    margin-bottom: -22px;
+}
+
+.usermasterview{
+    margin-top:-34px;
+}
