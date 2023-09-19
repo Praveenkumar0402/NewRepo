@@ -1,0 +1,162 @@
+        Hexa-Decimal-Binary
+
+// Online C compiler to run C program online
+#include<stdio.h>
+#include<string.h>
+int main() {
+    char a[100];
+    int i,p=0,v;
+    int dec=0;
+    printf("Enter the number:");
+    scanf("%s",a);
+    for(i=strlen(a)-1;i>=0;i--){
+        if(a[i]>='0'&&a[i]<='9'){
+            v=a[i]-'0';
+        }else{
+            v=a[i]-'A'+10;
+        }
+        dec=dec+v*pow(16,p);
+        ++p;
+    }
+    printf("Decimal:%d",dec);
+    
+    int j,k;
+    for(i=0;dec>0;i++){
+        a[i]=dec%2;
+        dec/=2;
+    }
+    printf("\nBinary:");
+    for(k=i-1;k>=0;k--){
+        printf("%d",a[k]);
+    }
+}
+
+
+   		Octal-Decimal-HexaDecimal
+   		
+// Online C compiler to run C program online
+#include<stdio.h>
+#include<string.h>
+int main() {
+    int k,p=0,rem,dec=0,n;
+    int i,j,r;
+    printf("Enter the number:");
+    scanf("%d",&n);
+    for(k=0;n>0;k++){
+        rem=n%10;
+        dec=dec+rem*pow(8,p);
+        n/=10;
+        ++p;
+    }
+    printf("Decimal:%d",dec);
+    
+    char a[100];
+    for(i=0;dec>0;i++){
+        r=dec%16;
+        if(r>=0&&r<=9){
+            a[i]=r+48;
+        }else{
+            a[i]=r+55;
+        }
+        dec=dec/16;
+    }
+    printf("\nHexa:");
+    for(j=i-1;j>=0;j--){
+        printf("%c",a[j]);
+    }
+}
+
+		Octal-Decimal-Binary
+		
+// Online C compiler to run C program online
+#include<stdio.h>
+#include<string.h>
+int main() {
+
+    int k,p=0,rem,dec=0,n;
+    int i,j,r;
+    printf("Enter the number:");
+    scanf("%d",&n);
+    for(k=0;n>0;k++){
+        rem=n%10;
+        dec=dec+rem*pow(8,p);
+        n/=10;
+        ++p;
+    }
+    printf("Decimal:%d",dec);
+    
+    char a[100];
+    for(i=0;dec>0;i++){
+        a[i]=dec%2;
+        dec/=2;
+    }
+    printf("\nBinary:");
+    for(j=i-1;j>=0;j--){
+        printf("%d",a[j]);
+    }
+}
+
+			Binary-Decimal-HexaDecimal
+			
+// Online C compiler to run C program online
+#include<stdio.h>
+#include<string.h>
+int main() {
+   // char a[100];
+    int k,p=0,rem,dec=0,n;
+    int i,j,r;
+    printf("Enter the number:");
+    scanf("%d",&n);
+    for(k=0;n>0;k++){
+        rem=n%10;
+        dec=dec+rem*pow(2,p);
+        n/=10;
+        ++p;
+    }
+    printf("Decimal:%d",dec);
+    
+    char a[100];
+    for(i=0;dec>0;i++){
+        r=dec%16;
+        if(r>=0&&r<=9){
+            a[i]=r+48;
+        }else{
+            a[i]=r+55;
+        }
+        dec=dec/16;
+    }
+    printf("\nHexa:");
+    for(j=i-1;j>=0;j--){
+        printf("%c",a[j]);
+    }
+}
+
+			Binary-Decimal-Octal
+			
+// Online C compiler to run C program online
+#include<stdio.h>
+#include<string.h>
+int main() {
+   // char a[100];
+    int k,p=0,rem,dec=0,n;
+    int i,j,r;
+    printf("Enter the number:");
+    scanf("%d",&n);
+    for(k=0;n>0;k++){
+        rem=n%10;
+        dec=dec+rem*pow(2,p);
+        n/=10;
+        ++p;
+    }
+    printf("Decimal:%d",dec);
+    
+    char a[100];
+    for(i=1;dec>0;i++){
+        a[i]=dec%8;
+        dec/=8;
+    }
+    printf("\nOcatl:");
+    for(j=i-1;j>0;j--){
+        printf("%d",a[j]);
+    }
+}
